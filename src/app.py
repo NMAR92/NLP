@@ -1,5 +1,13 @@
-from utils import db_connect
-engine = db_connect()
+import pandas as pd
+import pickle
+import numpy as np
+import re
+import unicodedata
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from sklearn.metrics import classification_report
+from sklearn.model_selection import GridSearchCV
 
 #0.
 df_raw = pd.read_csv('https://raw.githubusercontent.com/4GeeksAcademy/NLP-project-tutorial/main/url_spam.csv')
