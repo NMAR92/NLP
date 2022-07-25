@@ -14,13 +14,13 @@ df['is_spam'] = df['is_spam'].apply(lambda x: 1 if x == True else 0)
 vec = CountVectorizer().fit_transform(df['url_limpia'])
 #3. Split 
 X_train, X_test, y_train, y_test = train_test_split(vec, df['is_spam'], stratify = df['is_spam'], random_state = 2207)
-#Model
+#4. Model
 classifier = SVC(C = 1.0, kernel = 'linear', gamma = 'auto')
 classifier.fit(X_train, y_train)
-#4.Randomized search to select hyperparameters
+#5. Randomized search to select hyperparameters
 param_grid = {'C': [0.1,1, 10, 100], 'gamma': [1,0.1,0.01,0.001],'kernel': ['rbf', 'poly', 'sigmoid']}
 grid = GridSearchCV(SVC(random_state=1234),param_grid,verbose=2)
 grid.fit(X_train,y_train)
 best_model = grid.best_estimator_
-go#5. Save best model
+#6. Save best model
 pickle.dump(best_model, open('../models/best_model.pickle', 'wb'))
